@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.ranielschneider.atmsimulator.data.users
+import com.ranielschneider.atmsimulator.model.User
+
 
 @Composable
 fun LoginScreen() {
@@ -26,9 +28,10 @@ fun LoginScreen() {
     var errorMessage by remember { mutableStateOf("") }
     var passWord by remember { mutableStateOf("") }
     var isLoggedIn by remember { mutableStateOf(false) }
+    var loggedUser by remember { mutableStateOf<User?>(null) }
 
     if(isLoggedIn){
-        AtmScreen()
+        AtmScreen(loggedUser!!)
 
     }else{
 
@@ -80,6 +83,8 @@ fun LoginScreen() {
 
                         if (passwordNumber == user.passWord) {
                             isLoggedIn = true
+                            loggedUser = user
+
                         } else {
                             errorMessage = "Senha incorreta"
                         }
