@@ -31,7 +31,12 @@ fun LoginScreen() {
     var loggedUser by remember { mutableStateOf<User?>(null) }
 
     if(isLoggedIn){
-        AtmScreen(loggedUser!!)
+        AtmScreen(
+            loggedUser!!,
+            onLogout = {
+                isLoggedIn = false
+            }
+            )
 
     }else{
 

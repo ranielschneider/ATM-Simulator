@@ -19,7 +19,10 @@ import com.ranielschneider.atmsimulator.model.User
 import java.math.BigDecimal
 
 @Composable
-fun AtmScreen(user: User) {
+fun AtmScreen(
+    user: User,
+    onLogout: () -> Unit = {}
+) {
 
     var depositAmount by remember { mutableStateOf("") }
     var balance by remember { mutableStateOf(user.balance) }
@@ -91,8 +94,14 @@ fun AtmScreen(user: User) {
             Text("Levantar")
         }
 
-        Button(onClick = {}) {
+        Button(onClick = {
+            onLogout()
+        }) {
             Text("Sair")
+        }
+
+        if (withdrawError.isNotEmpty()) {
+            Text(withdrawError)
         }
     }
 }
